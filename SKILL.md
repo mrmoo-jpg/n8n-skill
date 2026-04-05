@@ -44,9 +44,27 @@ What would you like to do?
 <knowledge_base_index>
 Documentation lives in `knowledge_base/`:
 
-**nodes/** — Individual node documentation (triggers, actions, AI nodes, logic nodes)
-**patterns/** — Reusable workflow patterns (error handling, branching, agent loops)
-**examples/** — Complete example workflows with annotations
+**nodes/** — Per-node documentation with bugs, workarounds, and configuration:
+- `agent.md` — AI Agent (12 known bugs, v2.2 vs v3.0, memory, MCP, batch processing)
+- `http-request.md` — HTTP Request (pagination OOM, Stripe + HubSpot API blueprints)
+- `webhook.md` — Webhook (empty payloads, OOM, CORS, streaming caveats)
+- `code.md` — Code node (state mutation, try/catch wrappers, serialization rules)
+- `switch.md` — Switch node (FSM conditional edge routing)
+- `merge.md` — Merge node (cyclical entry point for loops)
+- `execute-workflow.md` — Execute Workflow (sub-workflow isolation, error containment)
+- `wait.md` — Wait node (HITL approval, parallel callback coordination)
+- `edit-fields.md` — Edit Fields (state init/reconciliation, defensive fallbacks)
+
+**patterns/** — Reusable workflow architecture blueprints:
+- `plan-and-execute.md` — 11-node FSM architecture with external state persistence
+- `manual-pagination-loop.md` — Memory-safe pagination replacing built-in (OOM-prone) pagination
+- `agent-error-handling.md` — Sub-workflow isolation, try/catch, dual-memory, circuit breaker
+- `hitl-approval.md` — Human-in-the-Loop via Wait node + Slack/Email approval
+- `api-search-update.md` — Two-phase identity resolution + state mutation (Stripe, HubSpot)
+
+**examples/** — Concrete, copy-pasteable configurations:
+- `stripe-customer-lookup.md` — Stripe customer search + update (auth, payloads, metadata hazard)
+- `hubspot-contact-lifecycle.md` — HubSpot contact search + lifecycle update (DAG constraint)
 
 To search the knowledge base, use Glob and Grep against `knowledge_base/` to find relevant documentation before suggesting any node configuration.
 </knowledge_base_index>
@@ -54,10 +72,19 @@ To search the knowledge base, use Glob and Grep against `knowledge_base/` to fin
 <reference_index>
 Skill references in `references/`:
 
-**n8n-expressions.md** — Expression syntax reference
-**agent-nodes.md** — AI agent node patterns and configuration
-**error-patterns.md** — Common error handling approaches
+**n8n-expressions.md** — Every expression pattern categorized (data access, pagination, casting, fallbacks, execution context, array manipulation)
+**agent-nodes.md** — AI Agent v2.2 vs v3.0 decision matrix, dual-memory, MCP contamination, batch fixes, tool error handling, Azure config, LangSmith setup
+**error-patterns.md** — Searchable catalog of 21 known errors with symptom/root cause/fix (agent, pagination, webhook, MCP, infrastructure)
 </reference_index>
+
+<reports_index>
+Raw deep research reports archived in `reports/`:
+
+- `1-node-issue-analysis.md` — Agent, HTTP Request, Webhook bugs and community workarounds
+- `2-agentic-design-pattern.md` — Plan-and-Execute architecture translated from LangGraph to n8n
+- `3-api-configuration.md` — Stripe and HubSpot HTTP Request node blueprints
+- `4-error-troubleshooting.md` — MCP contamination, batch failures, serialization bugs, Azure issues
+</reports_index>
 
 <workflows_index>
 | Workflow | Purpose |
